@@ -10,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MatCheckboxModule } from '@angular/material';
 
 const modules: any[] = [
   MatButtonModule,
@@ -17,7 +18,8 @@ const modules: any[] = [
   MatFormFieldModule,
   MatInputModule,
   MatDatepickerModule,
-  MatMomentDateModule
+  MatMomentDateModule,
+  MatCheckboxModule
 ];
 
 @NgModule({
