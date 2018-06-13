@@ -12,6 +12,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatCheckboxModule } from '@angular/material';
 
+// Navigation
+import { MatSidenavModule } from '@angular/material';
+
 const modules: any[] = [
   MatButtonModule,
   MatIconModule,
@@ -19,7 +22,8 @@ const modules: any[] = [
   MatInputModule,
   MatDatepickerModule,
   MatMomentDateModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatSidenavModule
 ];
 
 @NgModule({
