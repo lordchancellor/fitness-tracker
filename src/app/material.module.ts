@@ -7,12 +7,14 @@ import { MatIconModule } from '@angular/material/icon';
 // Form Controls
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 const modules: any[] = [
   MatButtonModule,
   MatIconModule,
   MatFormFieldModule,
-  MatInputModule
+  MatInputModule,
+  MatMomentDateModule
 ];
 
 @NgModule({
