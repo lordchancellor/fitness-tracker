@@ -15,6 +15,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 // Navigation
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
 
 const modules: any[] = [
 	MatButtonModule,
@@ -25,7 +26,8 @@ const modules: any[] = [
 	MatMomentDateModule,
 	MatCheckboxModule,
 	MatSidenavModule,
-	MatToolbarModule
+	MatToolbarModule,
+	MatListModule
 ];
 
 @NgModule({
