@@ -17,26 +17,26 @@ import { PastTrainingComponent } from './training/past-training/past-training.co
 import { WelcomeComponent } from './welcome/welcome.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    SignupComponent,
-    LoginComponent,
-    TrainingComponent,
-    CurrentTrainingComponent,
-    NewTrainingComponent,
-    PastTrainingComponent,
-    WelcomeComponent
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    FlexLayoutModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MaterialModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		SignupComponent,
+		LoginComponent,
+		TrainingComponent,
+		CurrentTrainingComponent,
+		NewTrainingComponent,
+		PastTrainingComponent,
+		WelcomeComponent
+	],
+	imports: [
+		BrowserModule,
+		BrowserAnimationsModule,
+		FlexLayoutModule,
+		FormsModule,
+		ReactiveFormsModule,
+		MaterialModule,
+		AppRoutingModule
+	],
+	providers: [],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }

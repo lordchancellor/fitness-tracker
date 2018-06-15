@@ -16,21 +16,21 @@ import { MatCheckboxModule } from '@angular/material';
 import { MatSidenavModule } from '@angular/material';
 
 const modules: any[] = [
-  MatButtonModule,
-  MatIconModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatDatepickerModule,
-  MatMomentDateModule,
-  MatCheckboxModule,
-  MatSidenavModule
+	MatButtonModule,
+	MatIconModule,
+	MatFormFieldModule,
+	MatInputModule,
+	MatDatepickerModule,
+	MatMomentDateModule,
+	MatCheckboxModule,
+	MatSidenavModule
 ];
 
 @NgModule({
-  imports: modules,
-  exports: modules,
-  providers: [
-    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
-  ]
+	imports: modules,
+	exports: modules,
+	providers: [
+		{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
+	]
 })
-export class MaterialModule {}
+export class MaterialModule { }

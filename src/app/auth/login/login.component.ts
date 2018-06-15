@@ -2,25 +2,25 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'ft-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+	selector: 'ft-login',
+	templateUrl: './login.component.html',
+	styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
 
-  loginForm: FormGroup;
+	loginForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {}
+	constructor(private formBuilder: FormBuilder) { }
 
-  ngOnInit() {
-    this.loginForm = this.formBuilder.group({
-      email: [ '', Validators.compose([ Validators.required, Validators.email ]) ],
-      password: [ '', Validators.required ]
-    });
-  }
+	ngOnInit(): void {
+		this.loginForm = this.formBuilder.group({
+			email: ['', Validators.compose([Validators.required, Validators.email])],
+			password: ['', Validators.required]
+		});
+	}
 
-  onSubmit(): void {
-    console.log(this.loginForm);
-  }
+	onSubmit(): void {
+		console.log(this.loginForm);
+	}
 
 }
