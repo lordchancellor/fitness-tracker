@@ -10,10 +10,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
-import { MatCheckboxModule } from '@angular/material';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 // Navigation
-import { MatSidenavModule } from '@angular/material';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 const modules: any[] = [
 	MatButtonModule,
@@ -23,7 +24,8 @@ const modules: any[] = [
 	MatDatepickerModule,
 	MatMomentDateModule,
 	MatCheckboxModule,
-	MatSidenavModule
+	MatSidenavModule,
+	MatToolbarModule
 ];
 
 @NgModule({
