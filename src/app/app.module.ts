@@ -7,6 +7,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material.module';
 import { AppRoutingModule } from './app-routing.module';
 
+import { AuthService } from './auth/auth.service';
+
 import { AppComponent } from './app.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -45,7 +47,9 @@ import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.com
 	entryComponents: [
 		StopWorkoutComponent
 	],
-	providers: [],
+	providers: [
+		AuthService
+	],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }
