@@ -8,6 +8,7 @@ import { MaterialModule } from './material.module';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AuthService } from './auth/auth.service';
+import { WorkoutService } from './workouts/workout.service';
 
 import { AppComponent } from './app.component';
 import { SignupComponent } from './auth/signup/signup.component';
@@ -48,7 +49,8 @@ import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.com
 		StopWorkoutComponent
 	],
 	providers: [
-		AuthService
+		AuthService,
+		WorkoutService
 	],
 	bootstrap: [AppComponent]
 })

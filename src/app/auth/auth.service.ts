@@ -48,7 +48,7 @@ export class AuthService {
 	
 	private userAuthenticated(): void {
 		this.authChange.next(true);
-		this.router.navigate([ '/training' ]);
+		this.router.navigate([ '/workouts' ]);
 	}
 
 }
