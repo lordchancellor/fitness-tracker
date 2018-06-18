@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
 	selector: 'ft-training',
 	templateUrl: './training.component.html',
 	styleUrls: ['./training.component.scss']
 })
-export class TrainingComponent implements OnInit {
+export class TrainingComponent {
+
+	ongoingTraining: boolean = false;
 
 	constructor() { }
-
-	ngOnInit(): void {
-	}
 
 }
