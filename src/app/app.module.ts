@@ -10,11 +10,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { LoginComponent } from './auth/login/login.component';
-import { TrainingComponent } from './training/training.component';
-import { CurrentTrainingComponent } from './training/current-training/current-training.component';
-import { StopTrainingComponent } from './training/current-training/stop-training.component';
-import { NewTrainingComponent } from './training/new-training/new-training.component';
-import { PastTrainingComponent } from './training/past-training/past-training.component';
+import { WorkoutsComponent } from './workouts/workouts.component';
+import { CurrentWorkoutComponent } from './workouts/current-workout/current-workout.component';
+import { StopWorkoutComponent } from './workouts/current-workout/stop-workout.component';
+import { NewWorkoutComponent } from './workouts/new-workout/new-workout.component';
+import { PastWorkoutsComponent } from './workouts/past-workouts/past-workouts.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
@@ -24,11 +24,11 @@ import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.com
 		AppComponent,
 		SignupComponent,
 		LoginComponent,
-		TrainingComponent,
-		CurrentTrainingComponent,
-		StopTrainingComponent,
-		NewTrainingComponent,
-		PastTrainingComponent,
+		WorkoutsComponent,
+		CurrentWorkoutComponent,
+		StopWorkoutComponent,
+		NewWorkoutComponent,
+		PastWorkoutsComponent,
 		WelcomeComponent,
 		HeaderComponent,
 		SidenavListComponent
@@ -43,7 +43,7 @@ import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.com
 		AppRoutingModule
 	],
 	entryComponents: [
-		StopTrainingComponent
+		StopWorkoutComponent
 	],
 	providers: [],
 	bootstrap: [AppComponent]

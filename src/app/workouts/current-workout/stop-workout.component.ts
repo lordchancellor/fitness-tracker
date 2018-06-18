@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
-	selector: 'ft-stop-training',
+	selector: 'ft-stop-workout',
 	template: `
 		<h1 mat-dialog-title>Are you sure?</h1>
 		<mat-dialog-content>
@@ -15,7 +15,7 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 	`,
 	styles: []
 })
-export class StopTrainingComponent {
+export class StopWorkoutComponent {
 
 	constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
 

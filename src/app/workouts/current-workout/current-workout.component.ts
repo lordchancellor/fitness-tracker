@@ -1,14 +1,14 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material';
 
-import { StopTrainingComponent } from './stop-training.component';
+import { StopWorkoutComponent } from './stop-workout.component';
 
 @Component({
-	selector: 'ft-current-training',
-	templateUrl: './current-training.component.html',
-	styleUrls: ['./current-training.component.scss']
+	selector: 'ft-current-workout',
+	templateUrl: './current-workout.component.html',
+	styleUrls: ['./current-workout.component.scss']
 })
-export class CurrentTrainingComponent implements OnInit {
+export class CurrentWorkoutComponent implements OnInit {
 
 	progress: number = 0;
 	timer: number;
@@ -25,7 +25,7 @@ export class CurrentTrainingComponent implements OnInit {
 	onStop(): void {
 		clearInterval(this.timer);
 
-		const dialog: MatDialogRef<StopTrainingComponent> = this.dialog.open(StopTrainingComponent, {
+		const dialog: MatDialogRef<StopWorkoutComponent> = this.dialog.open(StopWorkoutComponent, {
 			data: { progress: this.progress }
 		});
 

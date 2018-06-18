@@ -1,0 +1,10 @@
+<mat-tab-group *ngIf="!workoutActive">
+	<mat-tab label="New Workout">
+		<ft-new-workout (startWorkout)="workoutActive = true"></ft-new-workout>
+	</mat-tab>
+	<mat-tab label="Past Workouts">
+		<ft-past-workouts></ft-past-workouts>
+	</mat-tab>
+</mat-tab-group>
+
+<ft-current-workout *ngIf="workoutActive" (exitWorkout)="workoutActive = false"></ft-current-workout>
