@@ -12,4 +12,8 @@ a {
 	&:active {
 		color: #eee;
 	}
+
+	&.logout {
+		cursor: pointer;
+	}
 }

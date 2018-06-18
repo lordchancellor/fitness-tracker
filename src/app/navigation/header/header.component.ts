@@ -28,6 +28,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 		this.authSub.unsubscribe();
 	}
 
+	onLogout(): void {
+		this.authService.logout();
+	}
+
 	onToggleSidenav(): void {
 		this.sidenavToggle.emit();
 	}
