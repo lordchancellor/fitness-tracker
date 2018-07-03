@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 import { WorkoutService } from '../workout.service';
 
@@ -11,8 +12,6 @@ import { Workout } from '../workout.model';
 })
 export class NewWorkoutComponent implements OnInit {
 
-	@Output()
-	startWorkout: EventEmitter<void> = new EventEmitter();
 
 	workouts: Workout[] = [];
 
@@ -22,8 +21,8 @@ export class NewWorkoutComponent implements OnInit {
 		this.workouts = this.workoutService.getAvailableWorkouts();
 	}
 
-	onStartWorkout(): void {
-		this.startWorkout.emit();
+	onStartWorkout(form: NgForm): void {
+		this.workoutService.startWorkout(form.value.workout);
 	}
 
 }
