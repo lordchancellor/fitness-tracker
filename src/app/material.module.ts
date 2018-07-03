@@ -26,6 +26,11 @@ import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatTabsModule } from '@angular/material/tabs';
 
+// Data Table
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 const modules: any[] = [
 	MatButtonModule,
 	MatIconModule,
@@ -41,7 +46,10 @@ const modules: any[] = [
 	MatToolbarModule,
 	MatCardModule,
 	MatListModule,
-	MatTabsModule
+	MatTabsModule,
+	MatTableModule,
+	MatSortModule,
+	MatPaginatorModule
 ];
 
 @NgModule({

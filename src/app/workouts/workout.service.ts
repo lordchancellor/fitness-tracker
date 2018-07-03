@@ -41,7 +41,7 @@ export class WorkoutService {
 		this.workouts.push({ 
 			...this.currentWorkout,
 			duration: this.currentWorkout.duration * (progress / 100),
-			calories: this.currentWorkout.duration * (progress / 100),
+			calories: this.currentWorkout.calories * (progress / 100),
 			date: new Date(),
 			state: 'cancelled'
 		});
@@ -52,6 +52,10 @@ export class WorkoutService {
 
 	public getCurrentWorkout(): Workout {
 		return { ...this.currentWorkout };
+	}
+
+	public getCompletedOrCancelledWorkouts(): Workout[] {
+		return this.workouts.slice();
 	}
 
 }
