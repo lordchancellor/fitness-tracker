@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { Observable } from 'rxjs';
 
 import { WorkoutService } from '../workout.service';
 
@@ -13,12 +15,12 @@ import { Workout } from '../workout.model';
 export class NewWorkoutComponent implements OnInit {
 
 
-	workouts: Workout[] = [];
+	workouts: Observable<any>;
 
-	constructor(private workoutService: WorkoutService) {}
+	constructor(private workoutService: WorkoutService, private db: AngularFirestore) {}
 
 	ngOnInit(): void {
-		this.workouts = this.workoutService.getAvailableWorkouts();
+		this.workouts = this.db.collection('availableWorkouts').valueChanges();
 	}
 
 	onStartWorkout(form: NgForm): void {
