@@ -1,54 +1,57 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { Subject } from 'rxjs';
 
-import { User } from './user.model';
 import { AuthData } from './auth-data.model';
+import { WorkoutService } from '../workouts/workout.service';
 
 @Injectable()
 export class AuthService {
 	
 	public authChange: Subject<boolean> = new Subject();
-	private user: User;
+	private isAuth: boolean = false;
 
-	constructor(private router: Router) {}
+	constructor(private router: Router,
+							private afAuth: AngularFireAuth,
+							private workoutService: WorkoutService) {}
+
+	initAuthListener(): void {
+		this.afAuth.authState.subscribe(
+			user => {
+				if (user) {
+					this.isAuth = true;
+					this.authChange.next(true);
+					this.router.navigate([ '/workouts' ]);
+				}
+				else {
+					this.workoutService.cancelSubscriptions();
+					this.authChange.next(false);
+					this.router.navigate([ '/login' ]);
+					this.isAuth = false;
+				}
+			}
+		);
+	}
 
 	registerUser(authData: AuthData): void {
-		this.user = {
-			email: authData.email,
-			userId: Math.round(Math.random() * 10000).toString()
-		};
-		
-		this.userAuthenticated();
+		this.afAuth.auth.createUserWithEmailAndPassword(authData.email, authData.password)
+			.then(res => console.log(res))
+			.catch(err => console.log(err));
 	}
 	
 	login(authData: AuthData): void {
-		this.user = {
-			email: authData.email,
-			userId: Math.round(Math.random() * 10000).toString()
-		};
-		
-		this.userAuthenticated();
+		this.afAuth.auth.signInWithEmailAndPassword(authData.email, authData.password)
+			.then(res => console.log(res))
+			.catch(err => console.log(err));
 	}
 	
 	logout(): void {
-		this.user = null;
-		this.authChange.next(false);
-		
-		this.router.navigate([ '/login' ]);
-	}
-	
-	getUser(): User {
-		return { ...this.user };
+		this.afAuth.auth.signOut();
 	}
 	
 	isAuthenticated(): boolean {
-		return this.user != null;
+		return this.isAuth;
 	}
 	
-	private userAuthenticated(): void {
-		this.authChange.next(true);
-		this.router.navigate([ '/workouts' ]);
-	}
-
 }

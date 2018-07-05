@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Workout } from './workout.model';
@@ -14,27 +14,32 @@ export class WorkoutService {
 
 	private currentWorkout: Workout;
 	private availableWorkouts: Workout[] = [];
+	private subs: Subscription[] = [];
 
 	constructor(private db: AngularFirestore) {}
 
 	public fetchAvailableWorkouts(): void {
-		this.db
-			.collection('availableWorkouts')
-			.snapshotChanges()
-			.pipe(
-				map(docArray => {
-					return docArray.map(doc => {
-						return {
-							id: doc.payload.doc.id,
-							...doc.payload.doc.data()
-						};
-					});
-				})
-			)
-			.subscribe(((workouts: Workout[]) => {
-				this.availableWorkouts = workouts;
-				this.workoutsChanged.next([ ...this.availableWorkouts ]);
-			}));
+		this.subs.push(
+			this.db
+				.collection('availableWorkouts')
+				.snapshotChanges()
+				.pipe(
+					map(docArray => {
+						return docArray.map(doc => {
+							return {
+								id: doc.payload.doc.id,
+								...doc.payload.doc.data()
+							};
+						});
+					})
+				)
+				.subscribe(
+					(workouts: Workout[]) => {
+						this.availableWorkouts = workouts;
+						this.workoutsChanged.next([ ...this.availableWorkouts ]);
+					}
+				)
+			);
 	}
 
 	public startWorkout(selectedId: string): void {
@@ -71,11 +76,17 @@ export class WorkoutService {
 	}
 
 	public fetchFinishedWorkouts(): void {
-		this.db.collection('finishedWorkouts').valueChanges().subscribe(
-			(workouts: Workout[]) => {
-				this.finishedWorkoutsChanged.next([ ...workouts ]);
-			}
+		this.subs.push(
+			this.db.collection('finishedWorkouts').valueChanges().subscribe(
+				(workouts: Workout[]) => {
+					this.finishedWorkoutsChanged.next([ ...workouts ]);
+				}
+			)
 		);
+	}
+
+	public cancelSubscriptions(): void {
+		this.subs.forEach(sub => sub.unsubscribe());
 	}
 
 	private addToDatabase(workout: Workout): void {
