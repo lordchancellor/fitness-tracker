@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 import { WorkoutService } from '../workout.service';
 
@@ -12,15 +12,22 @@ import { Workout } from '../workout.model';
 	templateUrl: './new-workout.component.html',
 	styleUrls: ['./new-workout.component.scss']
 })
-export class NewWorkoutComponent implements OnInit {
+export class NewWorkoutComponent implements OnInit, OnDestroy {
 
-
-	workouts: Observable<any>;
+	workoutSub: Subscription;
+	workouts: Workout[];
 
 	constructor(private workoutService: WorkoutService, private db: AngularFirestore) {}
 
 	ngOnInit(): void {
-		this.workouts = this.db.collection('availableWorkouts').valueChanges();
+		this.workoutService.fetchAvailableWorkouts();
+		this.workoutSub = this.workoutService.workoutsChanged.subscribe(
+			(workouts: Workout[]) => this.workouts = workouts
+		);
+	}
+
+	ngOnDestroy(): void {
+		this.workoutSub.unsubscribe();
 	}
 
 	onStartWorkout(form: NgForm): void {

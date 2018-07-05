@@ -1,24 +1,40 @@
+import { Injectable } from '@angular/core';
+import { AngularFirestore } from 'angularfire2/firestore';
 import { Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { Workout } from './workout.model';
 
+@Injectable()
 export class WorkoutService {
 
 	workoutChanged: Subject<Workout> = new Subject();
-
-	private availableWorkouts: Workout[] = [
-		{ id: 'crunches', name: 'Crunches', duration: 30, calories: 8 },
-		{ id: 'pull-ups', name: 'Pull Ups', duration: 60, calories: 32 },
-		{ id: 'lunges', name: 'Lunges', duration: 120, calories: 60 },
-		{ id: 'burpees', name: 'Burpees', duration: 60, calories: 8 }
-	];
-
-	private workouts: Workout[] = [];
+	workoutsChanged: Subject<Workout[]> = new Subject();
+	finishedWorkoutsChanged: Subject<Workout[]> = new Subject();
 
 	private currentWorkout: Workout;
+	private availableWorkouts: Workout[] = [];
 
-	public getAvailableWorkouts(): Workout[] {
-		return [ ...this.availableWorkouts ];
+	constructor(private db: AngularFirestore) {}
+
+	public fetchAvailableWorkouts(): void {
+		this.db
+			.collection('availableWorkouts')
+			.snapshotChanges()
+			.pipe(
+				map(docArray => {
+					return docArray.map(doc => {
+						return {
+							id: doc.payload.doc.id,
+							...doc.payload.doc.data()
+						};
+					});
+				})
+			)
+			.subscribe(((workouts: Workout[]) => {
+				this.availableWorkouts = workouts;
+				this.workoutsChanged.next([ ...this.availableWorkouts ]);
+			}));
 	}
 
 	public startWorkout(selectedId: string): void {
@@ -27,7 +43,7 @@ export class WorkoutService {
 	}
 
 	public completeWorkout(): void {
-		this.workouts.push({ 
+		this.addToDatabase({ 
 			...this.currentWorkout,
 			date: new Date(),
 			state: 'completed'
@@ -38,7 +54,7 @@ export class WorkoutService {
 	}
 	
 	public cancelWorkout(progress: number): void {
-		this.workouts.push({ 
+		this.addToDatabase({ 
 			...this.currentWorkout,
 			duration: this.currentWorkout.duration * (progress / 100),
 			calories: this.currentWorkout.calories * (progress / 100),
@@ -54,8 +70,18 @@ export class WorkoutService {
 		return { ...this.currentWorkout };
 	}
 
-	public getCompletedOrCancelledWorkouts(): Workout[] {
-		return this.workouts.slice();
+	public fetchFinishedWorkouts(): void {
+		this.db.collection('finishedWorkouts').valueChanges().subscribe(
+			(workouts: Workout[]) => {
+				this.finishedWorkoutsChanged.next([ ...workouts ]);
+			}
+		);
+	}
+
+	private addToDatabase(workout: Workout): void {
+		this.db.collection('finishedWorkouts').add(workout)
+			.then(() => console.log('Record added'))
+			.catch(err => console.log(err));
 	}
 
 }
